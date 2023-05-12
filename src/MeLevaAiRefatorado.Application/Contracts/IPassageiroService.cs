@@ -13,9 +13,5 @@ namespace MeLevaAiRefatorado.Application.Contracts
         PassageiroDto Obter(Guid id);
 
         public PassageiroDto Remover(Guid id);
-
-        PassageiroDto SacarSaldo(Guid id, ValorRequest request);
-
-        PassageiroDto DepositarSaldo(Guid id, ValorRequest request);
     }
 }

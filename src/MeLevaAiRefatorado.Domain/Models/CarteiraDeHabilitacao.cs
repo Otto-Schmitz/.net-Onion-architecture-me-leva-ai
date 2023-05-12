@@ -5,6 +5,8 @@ namespace MeLevaAiRefatorado.Domain.Models
 {
     public class CarteiraDeHabilitacao
     {
+        public Guid Id { get; init; } = Guid.NewGuid();
+
         public string Numero { get; set; }
 
         [EnumDataType(typeof(Categoria), ErrorMessage = "O campo Categoria deve ser um valor válido.")]

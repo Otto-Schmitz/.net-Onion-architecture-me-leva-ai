@@ -10,9 +10,4 @@
     <PackageReference Include="Cpf" Version="2.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Contracts\Responses\" />
-    <Folder Include="Contracts\Requests\" />
-  </ItemGroup>
-
 </Project>

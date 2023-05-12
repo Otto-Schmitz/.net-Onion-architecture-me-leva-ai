@@ -21,7 +21,6 @@ namespace MeLevaAiRefatorado.Application.Mappers
                 Email = passageiro.Email,
                 DataNascimento = passageiro.DataNascimento,
                 Cpf = passageiro.Cpf,
-                Saldo = passageiro.Saldo,
                 EmCorrida = passageiro.EmCorrida,
             };
 

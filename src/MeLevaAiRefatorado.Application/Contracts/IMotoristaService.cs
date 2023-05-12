@@ -13,9 +13,5 @@ namespace MeLevaAiRefatorado.Application.Contracts
         MotoristaDto Adicionar(AdicionarMotoristaRequest request);
 
         MotoristaDto Remover(Guid id);
-
-        MotoristaDto SacarSaldo(Guid id, ValorRequest request);
-
-        MotoristaDto DepositarSaldo(Guid id, ValorRequest request);
     }
 }

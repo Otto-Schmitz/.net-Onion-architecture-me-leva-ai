@@ -80,55 +80,5 @@ namespace MeLevaAiRefatorado.Application.Services
 
             return passageiro.ToPassageiroDto();
         }
-
-        public PassageiroDto DepositarSaldo(Guid id, ValorRequest request)
-        {
-            var response = new PassageiroDto();
-
-            var passageiroAtual = _passageiroRepository.Obter(id);
-
-            if (passageiroAtual == null)
-            {
-                response.AddNotification(new Notification($"Passageiro com o id {id} não encontrado."));
-                return response;
-            }
-
-            if (request.Valor <= 0)
-            {
-                response.AddNotification(new Notification($"Valor depositado deve ser maior que zero."));
-                return response;
-            }
-
-            passageiroAtual.DepositarSaldo(request.Valor);
-
-            response = passageiroAtual.ToPassageiroDto();
-
-            return response;
-        }
-
-        public PassageiroDto SacarSaldo(Guid id, ValorRequest request)
-        {
-            var response = new PassageiroDto();
-
-            var passageiroAtual = _passageiroRepository.Obter(id);
-
-            if (passageiroAtual == null)
-            {
-                response.AddNotification(new Notification($"Passageiro com o id {id} não encontrado."));
-                return response;
-            }
-
-            if (request.Valor > passageiroAtual.Saldo)
-            {
-                response.AddNotification(new Notification($"Saldo insuficiente para realizar esse saque."));
-                return response;
-            }
-
-            passageiroAtual.SacarSaldo(request.Valor);
-
-            response = passageiroAtual.ToPassageiroDto();
-
-            return response;
-        }
     }
 }

@@ -2,17 +2,14 @@
 {
     public class Motorista : Pessoa
     {
-        public CarteiraDeHabilitacao CarteiraDeHabilitacao { get; set; }
+        public Guid CarteiraDeHabilitacaoId { get; set; }
 
         public List<Corrida> Corridas { get; init; } = new List<Corrida>();
 
-        public List<Avaliacao> Avaliacoes { get; set; }
-
-        public Motorista(string nome, string email, DateTime dataNascimento, string cpf, CarteiraDeHabilitacao carteiraDeHabilitacao)
+        public Motorista(string nome, string email, DateTime dataNascimento, string cpf, Guid carteiraDeHabilitacaoId)
             : base(nome, email, dataNascimento, cpf)
         {
-            CarteiraDeHabilitacao = carteiraDeHabilitacao;
-            Avaliacoes = new List<Avaliacao>();
+            CarteiraDeHabilitacaoId = carteiraDeHabilitacaoId;
         }
 
         public Motorista Alterar(Motorista motorista)
@@ -21,7 +18,7 @@
             Email = motorista.Email;
             DataNascimento = motorista.DataNascimento;
             Cpf = motorista.Cpf;
-            CarteiraDeHabilitacao = motorista.CarteiraDeHabilitacao;
+            CarteiraDeHabilitacaoId = motorista.CarteiraDeHabilitacaoId;
 
             return this;
         }
@@ -36,18 +33,6 @@
                 --idade;
 
             return idade >= idadeMinima;
-        }
-
-        public Motorista SacarSaldo(double valor)
-        {
-            Saldo -= valor;
-            return this;
-        }
-
-        public Motorista DepositarSaldo(double valor)
-        {
-            Saldo += valor;
-            return this;
         }
 
         public void AdicionarCorrida(Corrida corrida)

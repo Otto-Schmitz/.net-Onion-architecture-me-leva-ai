@@ -29,18 +29,6 @@
             return idade >= idadeMinima;
         }
 
-        public Passageiro SacarSaldo(double valor)
-        {
-            Saldo -= valor;
-            return this;
-        }
-
-        public Passageiro DepositarSaldo(double valor)
-        {
-            Saldo += valor;
-            return this;
-        }
-
         public void AdicionarCorrida(Corrida corrida)
         {
             Corridas.Add(corrida);

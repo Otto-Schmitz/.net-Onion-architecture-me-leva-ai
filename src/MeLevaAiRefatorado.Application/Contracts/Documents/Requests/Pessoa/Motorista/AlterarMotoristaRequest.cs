@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MeLevaAiRefatorado.Domain.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Motorista.Dtos
 {
@@ -21,6 +22,6 @@ namespace MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Mot
         public string Cpf { get; set; }
 
         [Required(ErrorMessage = "O campo Carteira de Habilitação é obrigatório.")]
-        public CarteiraDeHabilitacaoDto CarteiraDeHabilitacao { get; set; }
+        public CarteiraDeHabilitacao CarteiraDeHabilitacao { get; set; }
     }
 }

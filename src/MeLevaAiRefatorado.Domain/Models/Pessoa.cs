@@ -20,8 +20,6 @@
 
         public string Cpf { get; set; }
 
-        public double Saldo { get; set; } = 0;
-
         public bool EmCorrida { get; private set; } = false;
 
         public abstract bool VerificaIdadeMinima();

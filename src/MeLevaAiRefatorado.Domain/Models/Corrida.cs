@@ -8,15 +8,15 @@ namespace MeLevaAiRefatorado.Domain.Models
 
         public Guid PassageiroId { get; private set; }
 
-        public Veiculo Veiculo { get; private set; }
+        public Guid VeiculoId { get; private set; }
 
-        public Coordenadas PontoInicial { get; private set; }
+        public double PontoInicialX { get; private set; }
 
-        public Coordenadas PontoFinal { get; private set; }
+        public double PontoInicialY { get; private set; }
 
-        public Avaliacao AvaliacaoDoMotorista { get; private set; }
+        public double PontoFinalX { get; private set; }
 
-        public Avaliacao AvaliacaoDoPassageiro { get; private set; }
+        public double PontoFinalY { get; private set; }
 
         public int TempoEstimadoChegada { get; init; } = new Random().Next(5, 10);
 
@@ -24,20 +24,17 @@ namespace MeLevaAiRefatorado.Domain.Models
 
         public double ValorEstimado { get; private set; }
 
-        public double ValorFinal { get; private set; }
 
         public StatusCorrida StatusCorrida { get; private set; } = StatusCorrida.Solicitada;
 
-        public DateTime TempoInicial { get; private set; }
-
-        public string TempoFinal { get; private set; }
-
-        public Corrida(Guid passageiroId, Veiculo veiculo, Coordenadas pontoInicial, Coordenadas pontoFinal)
+        public Corrida(Guid passageiroId, Guid veiculoId, double pontoInicialX, double pontoInicialY, double pontoFinalX, double pontoFinalY)
         {
             PassageiroId = passageiroId;
-            Veiculo = veiculo;
-            PontoInicial = pontoInicial;
-            PontoFinal = pontoFinal;
+            VeiculoId = veiculoId;
+            PontoInicialX = pontoInicialX;
+            PontoInicialY = pontoInicialY;
+            PontoFinalX = pontoFinalX;
+            PontoFinalY = pontoFinalY;
         }
 
         public void AtualizarValorEstimado(double valor)
@@ -53,31 +50,6 @@ namespace MeLevaAiRefatorado.Domain.Models
         public void AtualizarStatusCorrida(StatusCorrida statusCorrida)
         {
             StatusCorrida = statusCorrida;
-        }
-
-        public void AtualizarAvaliacaoPassageiro(Avaliacao avaliacaoDoPassageiro)
-        {
-            AvaliacaoDoPassageiro = avaliacaoDoPassageiro;
-        }
-
-        public void AtualizarAvaliacaoMotorista(Avaliacao avaliacaoDoMotorista)
-        {
-            AvaliacaoDoMotorista = avaliacaoDoMotorista;
-        }
-
-        public void AdicionarTempoInicial(DateTime tempoInicial)
-        {
-            TempoInicial = tempoInicial;
-        }
-
-        public void AdicionarTempoFinal(string tempoFinal)
-        {
-            TempoFinal = tempoFinal;
-        }
-
-        public void AdicionarValorFinal(double valorFinal)
-        {
-            ValorFinal = valorFinal;
         }
     }
 }

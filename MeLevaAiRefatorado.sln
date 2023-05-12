@@ -11,13 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{1AF50A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9346EA13-C855-4A2F-BC1F-AA521D5B1539}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeLevaAiRefatorado.WebApi", "src\MeLevaAiRefatorado.WebApi\MeLevaAiRefatorado.WebApi.csproj", "{05667D8A-711C-49C3-8EA1-AF4B0A2B7A7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeLevaAiRefatorado.WebApi", "src\MeLevaAiRefatorado.WebApi\MeLevaAiRefatorado.WebApi.csproj", "{05667D8A-711C-49C3-8EA1-AF4B0A2B7A7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeLevaAiRefatorado.Application", "src\MeLevaAiRefatorado.Application\MeLevaAiRefatorado.Application.csproj", "{6237326F-B962-438D-A488-FE2EFAB0E72A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeLevaAiRefatorado.Application", "src\MeLevaAiRefatorado.Application\MeLevaAiRefatorado.Application.csproj", "{6237326F-B962-438D-A488-FE2EFAB0E72A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeLevaAiRefatorado.Domain", "src\MeLevaAiRefatorado.Domain\MeLevaAiRefatorado.Domain.csproj", "{66AF29E7-2865-4ECA-A3EE-5C677FF07C0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeLevaAiRefatorado.Domain", "src\MeLevaAiRefatorado.Domain\MeLevaAiRefatorado.Domain.csproj", "{66AF29E7-2865-4ECA-A3EE-5C677FF07C0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeLevaAiRefatorado.Infrastructure", "src\MeLevaAiRefatorado.Infrastructure\MeLevaAiRefatorado.Infrastructure.csproj", "{B77DBD63-BF88-4471-91B9-643B3C532A2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeLevaAiRefatorado.Infrastructure", "src\MeLevaAiRefatorado.Infrastructure\MeLevaAiRefatorado.Infrastructure.csproj", "{B77DBD63-BF88-4471-91B9-643B3C532A2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

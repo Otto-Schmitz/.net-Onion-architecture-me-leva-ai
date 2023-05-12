@@ -1,100 +1,105 @@
-﻿//using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Corrida;
-//using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Corrida;
-//using MeLevaAiRefatorado.Application.Validations.Core;
-//using MeLevaAiRefatorado.Domain.Contracts.Repositories;
-//using MeLevaAiRefatorado.Domain.Models;
+﻿using MeLevaAiRefatorado.Application.Contracts;
+using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Corrida;
+using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Corrida;
+using MeLevaAiRefatorado.Application.Mappers;
+using MeLevaAiRefatorado.Application.Validations.Core;
+using MeLevaAiRefatorado.Domain.Contracts.Repositories;
+using MeLevaAiRefatorado.Domain.Models;
 
-//namespace MeLevaAiRefatorado.Application.Services
-//{
-//    public class CorridaService
-//    {
-//        private readonly ICorridaRepository _corridaRepository;
+namespace MeLevaAiRefatorado.Application.Services
+{
+    public class CorridaService : ICorridaService
+    {
+        private readonly ICorridaRepository _corridaRepository;
 
-//        private readonly IVeiculoRepository _veiculoRepository;
+        private readonly IVeiculoRepository _veiculoRepository;
 
-//        private readonly IMotoristaRepository _motoristaRepository;
+        private readonly IMotoristaRepository _motoristaRepository;
 
-//        private readonly IPassageiroRepository _passageiroRepository;
+        private readonly IPassageiroRepository _passageiroRepository;
 
-//        private readonly double VALOR_POR_SEGUNDO = 0.2;
+        private readonly ICarteiraDeHabilitacaoRepository _carteiraDeHabilitacaoRepository;
 
-//        private readonly double VELOCIDADE_EM_KMH = 30;
+        public CorridaService(ICorridaRepository corridaRepository, IVeiculoRepository veiculoRepository, IMotoristaRepository motoristaRepository, IPassageiroRepository passageiroRepository, ICarteiraDeHabilitacaoRepository carteiraDeHabilitacaoRepository)
+        {
+            _corridaRepository = corridaRepository;
+            _veiculoRepository = veiculoRepository;
+            _motoristaRepository = motoristaRepository;
+            _passageiroRepository = passageiroRepository;
+            _carteiraDeHabilitacaoRepository = carteiraDeHabilitacaoRepository;
+        }
 
-//        private readonly double SEGUNDOS_EM_1H = 60 * 60;
+        public ChamarCorridaDto Chamar(ChamarCorridaRequest request)
+        {
+            var response = new ChamarCorridaDto();
+            var veiculo = ChamarVeiculo();
 
-//        private readonly double NOTA_MINIMA = 1;
+            if (veiculo == null)
+            {
+                response.AddNotification(new Notification("Nenhum veículo disponível foi encontrados."));
+                return response;
+            }
 
-//        private readonly double NOTA_MAXIMA = 5;
+            var motorista = _motoristaRepository.Obter(veiculo.MotoristaId);
 
-//        public CorridaService(ICorridaRepository corridaRepository, IVeiculoRepository veiculoRepository, IMotoristaRepository motoristaRepository, IPassageiroRepository passageiroRepository)
-//        {
-//            _corridaRepository = corridaRepository;
-//            _veiculoRepository = veiculoRepository;
-//            _motoristaRepository = motoristaRepository;
-//            _passageiroRepository = passageiroRepository;
-//        }
+            var passageiro = _passageiroRepository.Obter(request.PassageiroId);
 
-//        public ChamarCorridaDto Chamar(ChamarCorridaRequest request)
-//        {
-//            var response = new ChamarCorridaDto();
+            if (passageiro == null)
+            {
+                response.AddNotification(new Notification("Passageiro inválida."));
+                return response;
+            }
+            if (passageiro.EmCorrida)
+            {
+                response.AddNotification(new Notification("Passageiro em corrida."));
+                return response;
+            }
+            if (motorista == null)
+            {
+                response.AddNotification(new Notification("Motorista inválida."));
+                return response;
+            }
+            if (motorista.EmCorrida)
+            {
+                response.AddNotification(new Notification("Motorista em corrida."));
+                return response;
+            }
 
-//            var veiculo = ChamarVeiculo();
+            var corrida = request.ToCorrida(passageiro, veiculo);
 
-//            if (veiculo == null)
-//            {
-//                response.AddNotification(new Notification("Nenhum veículo disponível foi encontrados."));
-//                return response;
-//            }
+            _corridaRepository.Adicionar(corrida);
+            passageiro.AdicionarCorrida(corrida);
+            motorista.AdicionarCorrida(corrida);
+            passageiro.IniciarCorrida();
+            motorista.IniciarCorrida();
 
-//            var motorista = _motoristaRepository.Obter(veiculo.MotoristaId);
+            return corrida.ToChamarCorridaDto(veiculo);
+        }
 
-//            var passageiro = _passageiroRepository.Obter(request.PassageiroId);
+        private Veiculo? ChamarVeiculo()
+        {
+            var veiculos = _veiculoRepository.Listar().ToArray();
 
-//            if (passageiro == null)
-//            {
-//                response.AddNotification(new Notification("Passageiro inválida."));
-//                return response;
-//            }
-//            if (passageiro.EmCorrida)
-//            {
-//                response.AddNotification(new Notification("Passageiro em corrida."));
-//                return response;
-//            }
+            foreach (var veiculo in veiculos)
+            {
+                var motorista = _motoristaRepository.Obter(veiculo.MotoristaId.GetValueOrDefault());
+                var carteira = _carteiraDeHabilitacaoRepository.Obter(motorista.CarteiraDeHabilitacaoId);
 
-//            var corrida = request.ToCorrida(passageiro, veiculo);
+                if (motorista == null)
+                    return null;
 
-//            _corridaRepository.Adicionar(corrida);
-//            passageiro.AdicionarCorrida(corrida);
-//            motorista.AdicionarCorrida(corrida);
-//            passageiro.IniciarCorrida();
-//            motorista.IniciarCorrida();
+                if (carteira == null)
+                    return null;
 
-//            response = corrida.ToChamarCorridaDto();
+                if (carteira.DataVencimento < DateTime.Now)
+                    return null;
 
-//            return response;
-//        }
+                if (motorista.EmCorrida)
+                    return null;
 
-//        private Veiculo? ChamarVeiculo()
-//        {
-//            var veiculos = _veiculoRepository.Listar().ToArray();
-
-//            foreach (var veiculo in veiculos)
-//            {
-//                var motorista = _motoristaRepository.Obter(veiculo.MotoristaId.GetValueOrDefault());
-
-//                if (motorista == null)
-//                    return null;
-
-//                if (motorista.CarteiraDeHabilitacao.DataVencimento < DateTime.Now)
-//                    return null;
-
-//                if (motorista.EmCorrida)
-//                    return null;
-
-//                return veiculo;
-//            }
-
-//            return null;
-//        }
-//    }
-//}
+                return veiculo;
+            }
+            return null;
+        }
+    }
+}

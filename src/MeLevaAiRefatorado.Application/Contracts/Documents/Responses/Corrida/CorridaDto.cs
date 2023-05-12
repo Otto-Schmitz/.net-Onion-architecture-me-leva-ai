@@ -14,7 +14,5 @@ namespace MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Corrida
         public VeiculoDto Veiculo { get; set; }
 
         public int TempoEstimando { get; set; }
-
-        public CoordenadasDto Pontos { get; set; }
     }
 }

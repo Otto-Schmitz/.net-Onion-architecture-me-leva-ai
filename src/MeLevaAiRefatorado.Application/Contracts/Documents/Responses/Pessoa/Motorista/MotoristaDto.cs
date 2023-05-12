@@ -14,11 +14,7 @@ namespace MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Pessoa.Mo
 
         public string Cpf { get; set; }
 
-        public CarteiraDeHabilitacaoDto CarteiraDeHabilitacao { get; set; }
-
-        public double Saldo { get; set; }
-
-        public List<AvaliacaoDto> Avaliacoes { get; set; }
+        public Guid CarteiraDeHabilitacaoId { get; set; }
 
         public bool EmCorrida { get; set; }
     }

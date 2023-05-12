@@ -65,31 +65,5 @@ namespace MeLevaAiRefatorado.WebApi.Controllers
 
             return Ok(response);
         }
-
-        [HttpPut("{id}/sacar")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PassageiroDto))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public ActionResult<PassageiroDto> SacarSaldo(Guid id, [FromBody] ValorRequest request)
-        {
-            var response = _passageiroService.SacarSaldo(id, request);
-
-            if (!response.IsValid())
-                return BadRequest(new ErrorResponse(response.Notifications));
-
-            return Ok(response);
-        }
-
-        [HttpPut("{id}/depositar")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PassageiroDto))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public ActionResult<PassageiroDto> DepositarSaldo(Guid id, [FromBody] ValorRequest request)
-        {
-            var response = _passageiroService.DepositarSaldo(id, request);
-
-            if (!response.IsValid())
-                return BadRequest(new ErrorResponse(response.Notifications));
-
-            return Ok(response);
-        }
     }
 }
