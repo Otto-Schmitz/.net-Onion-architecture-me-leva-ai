@@ -5,11 +5,6 @@ using MeLevaAiRefatorado.Application.Mappers;
 using MeLevaAiRefatorado.Application.Validations.Core;
 using MeLevaAiRefatorado.Domain.Contracts.Repositories;
 using MeLevaAiRefatorado.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MeLevaAiRefatorado.Application.Services
 {
@@ -28,10 +23,10 @@ namespace MeLevaAiRefatorado.Application.Services
             _carteiraDeHabilitacaoRepository = carteiraDeHabilitacaoRepository;
         }
 
-        public VeiculoDto Adicionar(AdicionarVeiculoRequest request)
+        public VeiculoDto Cadastrar(AdicionarVeiculoRequest request)
         {
             var novoVeiculo = request.ToVeiculo();
-            var motorista = _motoristaRepository.Obter(request.MotoristaId);
+            var motorista = _motoristaRepository.Obter(request.MotoristaId).Result;
             
 
             if (motorista == null)
@@ -41,7 +36,7 @@ namespace MeLevaAiRefatorado.Application.Services
                 return response;
             }
 
-            var carteira = _carteiraDeHabilitacaoRepository.Obter(motorista.CarteiraDeHabilitacaoId);
+            var carteira = _carteiraDeHabilitacaoRepository.Obter(motorista.CarteiraDeHabilitacaoId).Result;
 
             if (!VerificarCategoria(novoVeiculo, carteira))
             {
@@ -64,13 +59,13 @@ namespace MeLevaAiRefatorado.Application.Services
 
         public IEnumerable<VeiculoDto> Listar()
         {
-            return _veiculoRepository.Listar().ToVeiculoDto();
+            return _veiculoRepository.Listar().Result.ToVeiculoDto();
         }
 
         public VeiculoDto Obter(Guid id)
         {
             var response = new VeiculoDto();
-            var veiculo = _veiculoRepository.Obter(id);
+            var veiculo = _veiculoRepository.Obter(id).Result;
 
             if (veiculo == null)
             {
@@ -85,7 +80,7 @@ namespace MeLevaAiRefatorado.Application.Services
         public VeiculoDto Remover(Guid id)
         {
             var response = new VeiculoDto();
-            var veiculo = _veiculoRepository.Obter(id);
+            var veiculo = _veiculoRepository.Obter(id).Result;
 
             if (veiculo == null)
             {
@@ -94,7 +89,7 @@ namespace MeLevaAiRefatorado.Application.Services
                 return response;
             }
 
-            _veiculoRepository.Remover(id);
+            _veiculoRepository.Remover(veiculo);
 
             return veiculo.ToVeiculoDto();
         }

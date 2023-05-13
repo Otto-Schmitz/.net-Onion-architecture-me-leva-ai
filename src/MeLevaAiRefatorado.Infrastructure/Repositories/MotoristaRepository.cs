@@ -1,34 +1,42 @@
 ﻿using MeLevaAiRefatorado.Domain.Contracts.Repositories;
 using MeLevaAiRefatorado.Domain.Models;
+using MeLevaAiRefatorado.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MeLevaAiRefatorado.Infrastructure.Repositories
 {
     public class MotoristaRepository : IMotoristaRepository
     {
-        private static readonly List<Motorista> _motoristas = new();
+        private readonly DataContext _context;
 
-        public IEnumerable<Motorista> Listar()
-            => _motoristas;
-
-        public Motorista? Obter(Guid? id)
-            => _motoristas.FirstOrDefault(v => v.Id == id);
-
-        public Motorista? ObterPorCpf(string cpf)
-            => _motoristas.FirstOrDefault(v => v.Cpf == cpf);
-
-        public void Cadastrar(Motorista motorista)
+        public MotoristaRepository(DataContext context)
         {
-            _motoristas.Add(motorista);
+            _context = context; 
         }
 
-        public bool Remover(Guid id)
+        public async Task<IEnumerable<Motorista>> Listar()
+            => await _context.Motoristas.ToListAsync();
+
+        public async Task<Motorista?> Obter(Guid? id)
+            => await _context.Motoristas.FindAsync(id);
+
+        public async Task<Motorista?> ObterPorCpf(string cpf)
+            => await _context.Motoristas.Where(p => p.Cpf.Contains(cpf)).FirstOrDefaultAsync();
+
+        public async Task<Motorista> Cadastrar(Motorista motorista)
         {
-            var motorista = Obter(id);
+            _context.Motoristas.Add(motorista);
+            await _context.SaveChangesAsync();
 
-            if (motorista is null)
-                return false;
+            return motorista;
+        }
 
-            return _motoristas.Remove(motorista);
+        public async Task<Motorista> Remover(Motorista motorista)
+        {
+            _context.Remove(motorista);
+            await _context.SaveChangesAsync();
+            
+            return motorista;
         }
     }
 }

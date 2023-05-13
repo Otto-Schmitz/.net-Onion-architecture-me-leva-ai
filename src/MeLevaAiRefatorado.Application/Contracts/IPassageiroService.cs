@@ -1,12 +1,11 @@
-﻿using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa;
-using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Passageiro;
+﻿using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Passageiro;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Pessoa.Passageiro;
 
 namespace MeLevaAiRefatorado.Application.Contracts
 {
     public interface IPassageiroService
     {
-        PassageiroDto Adicionar(AdicionarPassageiroRequest request);
+        PassageiroDto Cadastrar(AdicionarPassageiroRequest request);
 
         IEnumerable<PassageiroDto> Listar();
 

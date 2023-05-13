@@ -1,5 +1,4 @@
 ﻿using MeLevaAiRefatorado.Application.Validations.Core;
-using MeLevaAiRefatorado.Domain.Models.Enuns;
 
 namespace MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Veiculo
 {
@@ -15,14 +14,8 @@ namespace MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Veiculo
 
         public string Modelo { get; set; }
 
-        public int Ano { get; set; }
-
         public string Cor { get; set; }
 
         public string FotoUrl { get; set; }
-
-        public int QuantidadeDeLugares { get; set; }
-
-        public Categoria Categoria { get; set; }
     }
 }

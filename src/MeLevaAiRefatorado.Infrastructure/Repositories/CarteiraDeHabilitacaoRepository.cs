@@ -1,25 +1,27 @@
 ﻿using MeLevaAiRefatorado.Domain.Contracts.Repositories;
 using MeLevaAiRefatorado.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MeLevaAiRefatorado.Infrastructure.Data;
 
 namespace MeLevaAiRefatorado.Infrastructure.Repositories
 {
     public class CarteiraDeHabilitacaoRepository : ICarteiraDeHabilitacaoRepository
     {
-        private static readonly List<CarteiraDeHabilitacao> _carteiras= new();
+        private readonly DataContext _context;
 
-        public void Adicionar(CarteiraDeHabilitacao carteira)
+        public CarteiraDeHabilitacaoRepository(DataContext context)
         {
-            _carteiras.Add(carteira);
+            _context = context;
+        }   
+
+        public async Task<CarteiraDeHabilitacao> Adicionar(CarteiraDeHabilitacao carteira)
+        {
+            _context.CarteiraDeHabilitacaos.Add(carteira);
+            await _context.SaveChangesAsync();
+
+            return carteira;
         }
 
-        public CarteiraDeHabilitacao? Obter(Guid id)
-        {
-            return _carteiras.FirstOrDefault(c => c.Id == id);
-        }
+        public async Task<CarteiraDeHabilitacao?> Obter(Guid id)
+            => await _context.CarteiraDeHabilitacaos.FindAsync(id);
     }
 }

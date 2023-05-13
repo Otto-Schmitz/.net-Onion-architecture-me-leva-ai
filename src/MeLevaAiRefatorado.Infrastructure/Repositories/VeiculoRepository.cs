@@ -1,48 +1,48 @@
 ﻿using MeLevaAiRefatorado.Domain.Contracts.Repositories;
 using MeLevaAiRefatorado.Domain.Models;
+using MeLevaAiRefatorado.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MeLevaAiRefatorado.Infrastructure.Repositories
 {
     public class VeiculoRepository : IVeiculoRepository
     {
-        private static readonly List<Veiculo> _veiculos = new();
+        private readonly DataContext _context;
 
-        public IEnumerable<Veiculo> Listar()
-            => _veiculos;
-
-        public Veiculo? Obter(Guid id)
-            => _veiculos.FirstOrDefault(v => v.Id == id);
-
-        public void Adicionar(Veiculo veiculo)
-        {
-            _veiculos.Add(veiculo);
+        public VeiculoRepository(DataContext context) { 
+            _context = context;
         }
 
-        public bool Remover(Guid id)
+        public async Task<IEnumerable<Veiculo>> Listar()
+            => await _context.Veiculos.ToListAsync();
+
+        public async Task<Veiculo?> Obter(Guid id)
+            => await _context.Veiculos.FindAsync(id);
+
+        public async Task<Veiculo> Adicionar(Veiculo veiculo)
         {
-            var veiculo = Obter(id);
+            _context.Veiculos.Add(veiculo); 
+            await _context.SaveChangesAsync();  
 
-            if (veiculo == null)
-                return false;
-
-            return _veiculos.Remove(veiculo);
+            return veiculo;
         }
 
-        public void Atualizar(Veiculo veiculo)
+        public async Task<Veiculo> Remover(Veiculo veiculo)
         {
-            Remover(veiculo.Id);
+            _context.Veiculos.Remove(veiculo);
+            await _context.SaveChangesAsync();
+
+            return veiculo;
+        }
+
+        public async Task<Veiculo> Atualizar(Veiculo veiculo)
+        {
+            Remover(veiculo);
             Adicionar(veiculo);
-        }
-        public Veiculo? ObterPorMotorista(Guid motoristaId)
-        {
-            return _veiculos.FirstOrDefault(v => v.MotoristaId == motoristaId);
-        }
 
-        public Veiculo? ObterAleatorio()
-        {
-            var random = new Random().Next(0, _veiculos.Count - 1);
-
-            return _veiculos[random];
+            return veiculo;
         }
+        public async Task<Veiculo?> ObterPorMotorista(Guid motoristaId)
+            => await _context.Veiculos.FindAsync(motoristaId);
     }
 }

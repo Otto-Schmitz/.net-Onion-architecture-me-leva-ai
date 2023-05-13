@@ -1,11 +1,6 @@
 ﻿using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Veiculo;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Veiculo;
 using MeLevaAiRefatorado.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MeLevaAiRefatorado.Application.Mappers
 {
@@ -25,11 +20,8 @@ namespace MeLevaAiRefatorado.Application.Mappers
                 Placa = veiculo.Placa,
                 Marca = veiculo.Marca,
                 Modelo = veiculo.Modelo,
-                Ano = veiculo.Ano,
                 Cor = veiculo.Cor,
-                FotoUrl = veiculo.FotoUrl,
-                QuantidadeDeLugares = veiculo.QuantidadeDeLugares,
-                Categoria = veiculo.Categoria
+                FotoUrl = veiculo.FotoUrl
             };
 
         public static IEnumerable<VeiculoDto> ToVeiculoDto(this IEnumerable<Veiculo> veiculos)

@@ -2,7 +2,6 @@
 using MeLevaAiRefatorado.Application.Contracts;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Corrida;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Corrida;
-using MeLevaAiRefatorado.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeLevaAiRefatorado.WebApi.Controllers

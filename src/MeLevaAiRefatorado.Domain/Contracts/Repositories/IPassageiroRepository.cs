@@ -4,14 +4,14 @@ namespace MeLevaAiRefatorado.Domain.Contracts.Repositories
 {
     public interface IPassageiroRepository
     {
-        IEnumerable<Passageiro> Listar();
+        Task<IEnumerable<Passageiro>> Listar();
 
-        Passageiro? Obter(Guid? id);
+        Task<Passageiro?> Obter(Guid? id);
 
-        Passageiro? ObterPorCpf(string cpf);
+        Task<Passageiro?> ObterPorCpf(string cpf);
 
-        Passageiro Cadastrar(Passageiro passageiro);
+        Task<Passageiro> Cadastrar(Passageiro passageiro);
 
-        bool Remover(Guid id);
+        Task<Passageiro> Remover(Passageiro passageiro);
     }
 }

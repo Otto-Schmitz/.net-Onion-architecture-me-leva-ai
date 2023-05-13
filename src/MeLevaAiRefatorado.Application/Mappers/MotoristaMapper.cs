@@ -1,12 +1,7 @@
-﻿using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Motorista.Dtos;
-using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Motorista;
+﻿using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Motorista;
+using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Motorista.Dtos;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Pessoa.Motorista;
 using MeLevaAiRefatorado.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MeLevaAiRefatorado.Application.Mappers
 {

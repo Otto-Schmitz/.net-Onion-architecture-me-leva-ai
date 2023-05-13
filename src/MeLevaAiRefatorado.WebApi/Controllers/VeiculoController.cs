@@ -44,9 +44,9 @@ namespace MeLevaAiRefatorado.WebApi.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AdicionarVeiculoRequest))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public ActionResult<VeiculoDto> Adicionar([FromBody] AdicionarVeiculoRequest request)
+        public ActionResult<VeiculoDto> Cadastrar([FromBody] AdicionarVeiculoRequest request)
         {
-            var response = _veiculoService.Adicionar(request);
+            var response = _veiculoService.Cadastrar(request);
 
             if (!response.IsValid())
                 return NotFound(new ErrorResponse(response.Notifications));

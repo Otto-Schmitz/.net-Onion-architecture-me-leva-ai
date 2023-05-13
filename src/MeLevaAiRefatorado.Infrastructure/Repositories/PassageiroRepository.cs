@@ -1,36 +1,42 @@
 ﻿using MeLevaAiRefatorado.Domain.Contracts.Repositories;
 using MeLevaAiRefatorado.Domain.Models;
+using MeLevaAiRefatorado.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MeLevaAiRefatorado.Infrastructure.Repositories
 {
     public class PassageiroRepository : IPassageiroRepository
     {
-        private static readonly List<Passageiro> _passageiros = new();
+        private readonly DataContext _context;
 
-        public IEnumerable<Passageiro> Listar()
-            => _passageiros;
-
-        public Passageiro? Obter(Guid? id)
-            => (from a in _passageiros where a.Id == id select a).FirstOrDefault();
-
-        public Passageiro? ObterPorCpf(string cpf)
-            => (from a in _passageiros where a.Cpf == cpf select a).FirstOrDefault();
-
-        public Passageiro Cadastrar(Passageiro passageiro)
+        public PassageiroRepository(DataContext context)
         {
-            _passageiros.Add(passageiro);
+            _context = context;
+        }
+
+        public async Task<IEnumerable<Passageiro>> Listar()
+            => await _context.Passageiros.ToListAsync();
+
+        public async Task<Passageiro?> Obter(Guid? id)
+            => await _context.Passageiros.FindAsync(id);
+
+        public async Task<Passageiro?> ObterPorCpf(string cpf)
+            => await _context.Passageiros.FirstOrDefault(p => p.Cpf == cpf);
+
+        public async Task<Passageiro> Cadastrar(Passageiro passageiro)
+        {
+            _context.Passageiros.Add(passageiro);
+            await _context.SaveChangesAsync();
 
             return passageiro;
         }
 
-        public bool Remover(Guid id)
+        public async Task<Passageiro> Remover(Passageiro passageiro)
         {
-            var passageiro = Obter(id);
+            _context.Passageiros.Remove(passageiro);
+            await _context.SaveChangesAsync();
 
-            if (passageiro is null)
-                return false;
-
-            return _passageiros.Remove(passageiro);
+            return passageiro;
         }
     }
 }

@@ -4,18 +4,16 @@ namespace MeLevaAiRefatorado.Domain.Contracts.Repositories
 {
     public interface IVeiculoRepository
     {
-        IEnumerable<Veiculo> Listar();
+        Task<IEnumerable<Veiculo>> Listar();
 
-        Veiculo? Obter(Guid id);
+        Task<Veiculo?> Obter(Guid id);
 
-        void Adicionar(Veiculo veiculo);
+        Task<Veiculo> Adicionar(Veiculo veiculo);
 
-        bool Remover(Guid id);
+        Task<Veiculo> Remover(Veiculo veiculo);
 
-        void Atualizar(Veiculo veiculo);
+        Task<Veiculo> Atualizar(Veiculo veiculo);
 
-        Veiculo? ObterPorMotorista(Guid motoristaId);
-
-        Veiculo? ObterAleatorio();
+        Task<Veiculo?> ObterPorMotorista(Guid motoristaId);
     }
 }

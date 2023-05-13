@@ -1,37 +1,47 @@
 ﻿using MeLevaAiRefatorado.Domain.Contracts.Repositories;
 using MeLevaAiRefatorado.Domain.Models;
+using MeLevaAiRefatorado.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MeLevaAiRefatorado.Infrastructure.Repositories
 {
     public class CorridaRepository : ICorridaRepository
     {
-        private static readonly List<Corrida> _corridas = new();
+        private readonly DataContext _context;
 
-        public IEnumerable<Corrida> Listar()
-            => _corridas;
-
-        public Corrida? Obter(Guid id)
-            => _corridas.FirstOrDefault(v => v.CorridaId == id);
-
-        public void Adicionar(Corrida corrida)
-        {
-            _corridas.Add(corrida);
+        public CorridaRepository(DataContext context)
+        { 
+            _context = context;
         }
 
-        public void Alterar(Corrida corrida)
+        public async Task<IEnumerable<Corrida>> Listar()
+            => await _context.Corridas.ToListAsync();
+
+        public async Task<Corrida?> Obter(Guid id)
+            => await _context.Corridas.FindAsync(id);
+
+        public async Task<Corrida> Adicionar(Corrida corrida)
         {
-            Remover(corrida.CorridaId);
+            _context.Corridas.Add(corrida);
+            await _context.SaveChangesAsync();
+
+            return corrida;
+        }
+
+        public async Task<Corrida> Alterar(Corrida corrida)
+        {
+            Remover(corrida);
             Adicionar(corrida);
+
+            return corrida;
         }
 
-        public bool Remover(Guid id)
+        public async Task<Corrida> Remover(Corrida corrida)
         {
-            var corrida = Obter(id);
+            _context.Corridas.Remove(corrida);
+            await _context.SaveChangesAsync();  
 
-            if (corrida == null)
-                return false;
-
-            return _corridas.Remove(corrida);
+            return corrida; 
         }
     }
 }

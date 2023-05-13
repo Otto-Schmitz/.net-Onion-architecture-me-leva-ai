@@ -1,6 +1,5 @@
 ﻿using MeLevaAi.Api.Contracts;
 using MeLevaAiRefatorado.Application.Contracts;
-using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Passageiro;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Pessoa.Passageiro;
 using Microsoft.AspNetCore.Mvc;
@@ -43,9 +42,9 @@ namespace MeLevaAiRefatorado.WebApi.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PassageiroDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public ActionResult<PassageiroDto> Adicionar([FromBody] AdicionarPassageiroRequest request)
+        public ActionResult<PassageiroDto> Cadastrar([FromBody] AdicionarPassageiroRequest request)
         {
-            var response = _passageiroService.Adicionar(request);
+            var response = _passageiroService.Cadastrar(request);
 
             if (!response.IsValid())
                 return BadRequest(new ErrorResponse(response.Notifications));

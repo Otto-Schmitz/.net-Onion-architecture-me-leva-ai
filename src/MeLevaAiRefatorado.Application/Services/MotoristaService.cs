@@ -1,5 +1,4 @@
 ﻿using MeLevaAiRefatorado.Application.Contracts;
-using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Motorista;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Pessoa.Motorista;
 using MeLevaAiRefatorado.Application.Mappers;
@@ -21,7 +20,7 @@ namespace MeLevaAiRefatorado.Application.Services
             _carteiraDeHabilitacaoRepository = carteiraDeHabilitacaoRepository;
         }
 
-        public MotoristaDto Adicionar(AdicionarMotoristaRequest request)
+        public MotoristaDto Cadastrar(AdicionarMotoristaRequest request)
         {
             var novoMotorista = request.ToMotorista();
 
@@ -39,7 +38,7 @@ namespace MeLevaAiRefatorado.Application.Services
                 return response;
             }
 
-            if (request.CarteiraDeHabilitacao.DataVencimento > DateTime.Now)
+            if (request.CarteiraDeHabilitacao.DataVencimento < DateTime.Now)
             {
                 response.AddNotification(new Notification("Carteira de motorista expirada."));
                 return response;
@@ -53,13 +52,13 @@ namespace MeLevaAiRefatorado.Application.Services
 
         public IEnumerable<MotoristaDto> Listar()
         {
-            return _motoristaRepository.Listar().ToMotoristaDtos();
+            return _motoristaRepository.Listar().Result.ToMotoristaDtos();
         }
 
         public MotoristaDto Obter(Guid id)
         {
             var response = new MotoristaDto();
-            var motorista = _motoristaRepository.Obter(id);
+            var motorista = _motoristaRepository.Obter(id).Result;
 
             if (motorista == null)
             {
@@ -74,7 +73,7 @@ namespace MeLevaAiRefatorado.Application.Services
         {
             var response = new MotoristaDto();
 
-            var motorista = _motoristaRepository.Obter(id);
+            var motorista = _motoristaRepository.Obter(id).Result;
 
             if (motorista == null)
             {
@@ -90,7 +89,7 @@ namespace MeLevaAiRefatorado.Application.Services
                 return response;
             }
 
-            _motoristaRepository.Remover(id);
+            _motoristaRepository.Remover(motorista);
 
             return response;
         }

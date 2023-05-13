@@ -40,9 +40,9 @@ namespace MeLevaAiRefatorado.Application.Services
                 return response;
             }
 
-            var motorista = _motoristaRepository.Obter(veiculo.MotoristaId);
+            var motorista = _motoristaRepository.Obter(veiculo.MotoristaId).Result;
 
-            var passageiro = _passageiroRepository.Obter(request.PassageiroId);
+            var passageiro = _passageiroRepository.Obter(request.PassageiroId).Result;
 
             if (passageiro == null)
             {
@@ -78,12 +78,12 @@ namespace MeLevaAiRefatorado.Application.Services
 
         private Veiculo? ChamarVeiculo()
         {
-            var veiculos = _veiculoRepository.Listar().ToArray();
+            var veiculos = _veiculoRepository.Listar().Result.ToArray();
 
             foreach (var veiculo in veiculos)
             {
-                var motorista = _motoristaRepository.Obter(veiculo.MotoristaId.GetValueOrDefault());
-                var carteira = _carteiraDeHabilitacaoRepository.Obter(motorista.CarteiraDeHabilitacaoId);
+                var motorista = _motoristaRepository.Obter(veiculo.MotoristaId.GetValueOrDefault()).Result;
+                var carteira = _carteiraDeHabilitacaoRepository.Obter(motorista.CarteiraDeHabilitacaoId).Result;
 
                 if (motorista == null)
                     return null;

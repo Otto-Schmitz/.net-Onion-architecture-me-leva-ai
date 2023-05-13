@@ -6,6 +6,8 @@
 
         public List<Corrida> Corridas { get; init; } = new List<Corrida>();
 
+        public bool EmCorrida { get; set; } = false;
+
         public Motorista(string nome, string email, DateTime dataNascimento, string cpf, Guid carteiraDeHabilitacaoId)
             : base(nome, email, dataNascimento, cpf)
         {

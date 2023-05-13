@@ -4,14 +4,14 @@ namespace MeLevaAiRefatorado.Domain.Contracts.Repositories
 {
     public interface ICorridaRepository
     {
-        IEnumerable<Corrida> Listar();
+        Task<IEnumerable<Corrida>> Listar();
 
-        Corrida? Obter(Guid id);
+        Task<Corrida?> Obter(Guid id);
 
-        void Adicionar(Corrida corrida);
+        Task<Corrida> Adicionar(Corrida corrida);
 
-        void Alterar(Corrida corrida);
+        Task<Corrida> Alterar(Corrida corrida);
 
-        bool Remover(Guid id);
+        Task<Corrida> Remover(Corrida corrida);
     }
 }

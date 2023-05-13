@@ -1,5 +1,4 @@
 ﻿using MeLevaAiRefatorado.Application.Contracts;
-using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Passageiro;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Pessoa.Passageiro;
 using MeLevaAiRefatorado.Application.Mappers;
@@ -17,7 +16,7 @@ namespace MeLevaAiRefatorado.Application.Services
             _passageiroRepository = passageiroRepository;
         }
 
-        public PassageiroDto Adicionar(AdicionarPassageiroRequest request)
+        public PassageiroDto Cadastrar(AdicionarPassageiroRequest request)
         {
             var novoPassageiro = request.ToPassageiro();
             var response = new PassageiroDto();
@@ -34,7 +33,7 @@ namespace MeLevaAiRefatorado.Application.Services
                 return response;
             }
 
-            if (_passageiroRepository.ObterPorCpf(novoPassageiro.Cpf) != null)
+            if (_passageiroRepository.ObterPorCpf(novoPassageiro.Cpf).Result != null)
             {
                 response.AddNotification(new Notification("Passageiro já existe."));
                 return response;
@@ -47,13 +46,13 @@ namespace MeLevaAiRefatorado.Application.Services
 
         public IEnumerable<PassageiroDto> Listar()
         {
-            return _passageiroRepository.Listar().ToPassageiroDto();
+            return _passageiroRepository.Listar().Result.ToPassageiroDto();
         }
 
         public PassageiroDto Obter(Guid id)
         {
             var response = new PassageiroDto();
-            var passageiro = _passageiroRepository.Obter(id);
+            var passageiro = _passageiroRepository.Obter(id).Result;
 
             if (passageiro == null)
             {
@@ -68,7 +67,7 @@ namespace MeLevaAiRefatorado.Application.Services
         {
             var response = new PassageiroDto();
 
-            var passageiro = _passageiroRepository.Obter(id);
+            var passageiro = _passageiroRepository.Obter(id).Result;
 
             if (passageiro == null)
             {
@@ -76,7 +75,7 @@ namespace MeLevaAiRefatorado.Application.Services
                 return response;
             }
 
-            _passageiroRepository.Remover(id);
+            _passageiroRepository.Remover(passageiro);
 
             return passageiro.ToPassageiroDto();
         }
