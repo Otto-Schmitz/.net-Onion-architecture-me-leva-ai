@@ -37,7 +37,7 @@ namespace MeLevaAiRefatorado.Application.Services
             {
                 response.AddNotification(new Notification("Cpf inválido."));
                 return response;
-            }
+            }   
 
             if (request.CarteiraDeHabilitacao.DataVencimento < DateTime.Now)
             {
@@ -82,7 +82,7 @@ namespace MeLevaAiRefatorado.Application.Services
                 return response;
             }
 
-            var veiculo = _veiculoRepository.ObterPorMotorista(id);
+            var veiculo = _veiculoRepository.ObterPorMotorista(id).Result;
 
             if (veiculo != null)
             {

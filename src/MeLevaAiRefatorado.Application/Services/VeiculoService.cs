@@ -99,12 +99,12 @@ namespace MeLevaAiRefatorado.Application.Services
             return veiculo.ToVeiculoDto();
         }
 
-        public static bool VerificarCategoria(Veiculo veiculo, CarteiraDeHabilitacao carteira)
+        private static bool VerificarCategoria(Veiculo veiculo, CarteiraDeHabilitacao carteira)
         {
             return veiculo.Categoria == carteira.Categoria;
         }
 
-        public static bool VerificaCarteira(CarteiraDeHabilitacao carteira)
+        private static bool VerificaCarteira(CarteiraDeHabilitacao carteira)
         {
             return carteira.DataVencimento > DateTime.Now;
         }

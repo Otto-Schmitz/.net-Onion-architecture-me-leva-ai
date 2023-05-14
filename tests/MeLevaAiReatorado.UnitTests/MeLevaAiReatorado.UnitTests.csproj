@@ -25,7 +25,7 @@
   </ItemGroup> 
 
   <ItemGroup>
-    <ProjectReference Include="..\src\MeLevaAiRefatorado.Application\MeLevaAiRefatorado.Application.csproj" />
+    <ProjectReference Include="..\..\src\MeLevaAiRefatorado.Application\MeLevaAiRefatorado.Application.csproj" />
   </ItemGroup>
 
 </Project>

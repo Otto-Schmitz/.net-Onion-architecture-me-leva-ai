@@ -44,12 +44,12 @@ namespace MeLevaAiReatorado.UnitTests.Services
         {
             var request = _fakers.AdicionarPassageiroMenorRequest.Generate();
 
-            var expect = "Idade mínima é de 16 anos.";
+            var expected = "Idade mínima é de 16 anos.";
             var response = _passageiroService.Cadastrar(request);
 
             _passageiroRepository.Verify(x => x.Cadastrar(It.IsAny<Passageiro>()), Times.Never);
             Assert.Single(response.Notifications);
-            Assert.Equal(expect, response.Notifications.First().Message);
+            Assert.Equal(expected, response.Notifications.First().Message);
         }
 
         [Fact]
@@ -59,12 +59,12 @@ namespace MeLevaAiReatorado.UnitTests.Services
             var passageiro = _fakers.Passageiro.Generate();
             _passageiroRepository.Setup(x => x.ObterPorCpf(request.Cpf)).ReturnsAsync(passageiro);
 
-            var expect = "Passageiro já existe.";
+            var expected = "Passageiro já existe.";
             var result = _passageiroService.Cadastrar(request);
 
             _passageiroRepository.Verify(x => x.Cadastrar(It.IsAny<Passageiro>()), Times.Never);
             Assert.Single(result.Notifications);
-            Assert.Equal(expect, result.Notifications.First().Message);
+            Assert.Equal(expected, result.Notifications.First().Message);
         }
 
         [Fact]
@@ -73,12 +73,12 @@ namespace MeLevaAiReatorado.UnitTests.Services
             var request = _fakers.AdicionarPassageiroRequest.Generate();
             request.Cpf = "12345678900";
 
-            var expect = "Cpf inválido.";
+            var expected = "Cpf inválido.";
             var response = _passageiroService.Cadastrar(request);
 
             _passageiroRepository.Verify(x => x.Cadastrar(It.IsAny<Passageiro>()), Times.Never);
             Assert.Single(response.Notifications);
-            Assert.Equal(expect, response.Notifications.First().Message);
+            Assert.Equal(expected, response.Notifications.First().Message);
         }
 
         //Obter
@@ -96,7 +96,7 @@ namespace MeLevaAiReatorado.UnitTests.Services
         }
 
         [Fact]
-        public void Obter_PassageiroEncontrado_DeveRetornarPassageiroDto()
+        public void Obter_DeveRetornarPassageiroDto_QuandoPassageiroExistir()
         {
             var passageiro = _fakers.Passageiro.Generate();
             _passageiroRepository.Setup(x => x.Obter(passageiro.Id)).ReturnsAsync(passageiro);
