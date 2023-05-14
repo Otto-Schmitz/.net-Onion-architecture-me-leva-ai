@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MeLevaAiRefatorado.Domain.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Corrida
 {

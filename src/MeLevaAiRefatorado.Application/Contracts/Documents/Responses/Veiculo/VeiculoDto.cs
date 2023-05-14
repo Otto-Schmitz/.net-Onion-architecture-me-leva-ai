@@ -1,4 +1,5 @@
 ﻿using MeLevaAiRefatorado.Application.Validations.Core;
+using MeLevaAiRefatorado.Domain.Models.Enuns;
 
 namespace MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Veiculo
 {

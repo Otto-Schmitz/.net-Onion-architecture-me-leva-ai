@@ -1,5 +1,11 @@
 ﻿using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Pessoa.Motorista;
 using MeLevaAiRefatorado.Domain.Models;
+using MeLevaAiRefatorado.Domain.Models.Enuns;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MeLevaAiRefatorado.Application.Mappers
 {

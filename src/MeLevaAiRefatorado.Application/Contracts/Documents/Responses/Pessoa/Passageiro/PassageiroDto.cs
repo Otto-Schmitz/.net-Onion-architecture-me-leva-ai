@@ -14,10 +14,6 @@ namespace MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Pessoa.Pa
 
         public string Cpf { get; set; }
 
-        public double Saldo { get; set; }
-
-        public List<AvaliacaoDto> Avaliacoes { get; set; }
-
         public bool EmCorrida { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace MeLevaAiRefatorado.Infrastructure.Repositories
             => await _context.Passageiros.FindAsync(id);
 
         public async Task<Passageiro?> ObterPorCpf(string cpf)
-            => await _context.Passageiros.FirstOrDefault(p => p.Cpf == cpf);
+            => await _context.Passageiros.Where(p => p.Cpf.Contains(cpf)).FirstOrDefaultAsync();
 
         public async Task<Passageiro> Cadastrar(Passageiro passageiro)
         {
