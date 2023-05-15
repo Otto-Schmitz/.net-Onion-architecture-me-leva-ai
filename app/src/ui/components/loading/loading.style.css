@@ -1,0 +1,27 @@
+.loader-container {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+
+	transform: translate(-50%, -50%);
+}
+
+.loader {
+	width: 5rem;
+	height: 5rem;
+	background-color: transparent;
+	border-radius: 5rem;
+	border-left: 0.3rem solid #000;
+	position: relative;
+	transform: rotate(0deg);
+	animation: spinning 1s linear infinite;
+}
+
+@keyframes spinning {
+	0% {
+		transform: rotate(0deg);
+	}
+	0% {
+		transform: rotate(-360deg);
+	}
+}

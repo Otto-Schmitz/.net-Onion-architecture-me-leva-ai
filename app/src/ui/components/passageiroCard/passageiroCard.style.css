@@ -1,0 +1,23 @@
+.passageiro-card {
+  position: relative;
+  transition: 1s;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.max-width {
+  width: 100%;
+}
+
+.passageiro-card:hover {
+  box-shadow: 1px 0px 10px 0px rgba(173, 216, 230, 0.5);
+}
+
+.take-ride {
+  width: 100%;
+  height: 100%;
+  text-indent: -999999rem;
+  position: absolute;
+}
