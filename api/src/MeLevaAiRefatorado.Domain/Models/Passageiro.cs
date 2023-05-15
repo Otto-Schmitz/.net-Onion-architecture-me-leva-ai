@@ -4,6 +4,8 @@
     {
         public List<Corrida> Corridas { get; init; } = new List<Corrida>();
 
+        public bool EmCorrida { get; set; } = false;
+
         public Passageiro(string nome, string email, DateTime dataNascimento, string cpf)
             : base(nome, email, dataNascimento, cpf) { }
 
@@ -41,13 +43,5 @@
 
         public Corrida? ObterCorrida(Guid id)
             => Corridas.FirstOrDefault(v => v.CorridaId == id);
-
-
-        public void AlterarCorrida(Corrida corrida)
-        {
-            RemoverCorrida(ObterCorrida(corrida.CorridaId));
-            AdicionarCorrida(corrida);
-        }
-
     }
 }

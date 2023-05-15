@@ -41,7 +41,6 @@ namespace MeLevaAiReatorado.UnitTests.Services
         {
             var request = _motoristaFakers.AdicionarMotoristaRequest.Generate();
             var motorista = _motoristaFakers.Motorista.Generate();
-            request.CarteiraDeHabilitacao = _motoristaFakers.CarteiraDeHabilitacao.Generate();
 
             var response = _motoristaService.Cadastrar(request);
 
@@ -53,7 +52,6 @@ namespace MeLevaAiReatorado.UnitTests.Services
         public void Cadastrar_DeveRetornarErro_QuandoMotoristaForMenorQue18Anos()
         {
             var request = _motoristaFakers.AdicionarMotoristaMenorRequest.Generate();
-            request.CarteiraDeHabilitacao = _motoristaFakers.CarteiraDeHabilitacao.Generate();
 
             var expected = "Idade mínima é de 18 anos.";
             var response = _motoristaService.Cadastrar(request);
@@ -67,7 +65,6 @@ namespace MeLevaAiReatorado.UnitTests.Services
         public void Cadastrar_DeveRetornarErro_QuandoCpfForInvalido()
         {
             var request = _motoristaFakers.AdicionarMotoristaRequest.Generate();
-            request.CarteiraDeHabilitacao = _motoristaFakers.CarteiraDeHabilitacao.Generate();
             request.Cpf = "";
 
             var expected = "Cpf inválido.";
@@ -81,8 +78,8 @@ namespace MeLevaAiReatorado.UnitTests.Services
         [Fact]
         public void Cadastrar_DeveRetornarErro_QuandoCarteiraDeHabilitacaoExpirar()
         {
-            var request = _motoristaFakers.AdicionarMotoristaRequest.Generate();
-            request.CarteiraDeHabilitacao = _motoristaFakers.CarteiraDeHabilitacaoExpirada.Generate();
+            var request = _motoristaFakers.AdicionarMotoristaCarteiraExpiradaRequest.Generate();
+
 
             var expected = "Carteira de motorista expirada.";
             var response = _motoristaService.Cadastrar(request);
@@ -201,6 +198,5 @@ namespace MeLevaAiReatorado.UnitTests.Services
 
             Assert.Equal(expected, response);
         }
-
     }
 }

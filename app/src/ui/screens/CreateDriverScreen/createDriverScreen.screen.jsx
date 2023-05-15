@@ -34,29 +34,27 @@ export function CreateDriverScreen() {
   const navigate = useNavigate();
 
   async function handleClickSubmit() {
-    console.log(inputForm, 'chegou');
     try {
       const driverId = await createDriver({
         ...inputForm,
       });
       await createVehicle({ ...inputForm, motoristaId: driverId.id });
-      console.log('qq');
       toastMensagem('Motorista criado com sucesso.', TOAST_TYPES.success);
       navigate('/');
     } catch (error) {
-      console.log(error);
       toastMensagem(error.response.data.message, TOAST_TYPES.error);
     }
   }
 
   function formValidator(event) {
     event.preventDefault();
-    console.log(inputForm);
     const validate = [
       cpfValidator(),
       numeroCarteiraValidator(),
       categoriaValidator(),
       placaValidator(),
+      categoriaCarteiraValidator(),
+      categoriaVeiculoValidator(),
     ].every((value) => value);
 
     if (validate) {
@@ -65,19 +63,31 @@ export function CreateDriverScreen() {
   }
 
   function categoriaCarteiraValidator() {
-    if (inputForm.categoria === 'A') inputForm.categoria = 0;
-    else if (inputForm.categoria === 'B') inputForm.categoria = 1;
-    else inputForm.categoria = 2;
-
-    console.log(inputForm.categoria);
+    if (inputForm.categoria === 'A') {
+      inputForm.categoria = 0;
+      return true;
+    } else if (inputForm.categoria === 'B') {
+      inputForm.categoriaVeiculo = 1;
+      return true;
+    } else if (inputForm.categoria === 'C') {
+      inputForm.categoria = 2;
+      return true;
+    }
+    return false;
   }
 
   function categoriaVeiculoValidator() {
-    if (inputForm.categoriaVeiculo === 'A') inputForm.categoriaVeiculo = 0;
-    else if (inputForm.categoriaVeiculo === 'B') inputForm.categoriaVeiculo = 1;
-    else inputForm.categoriaVeiculo = 2;
-
-    console.log(inputForm.categoriaVeiculo);
+    if (inputForm.categoriaVeiculo === 'A') {
+      inputForm.categoriaVeiculo = 0;
+      return true;
+    } else if (inputForm.categoriaVeiculo === 'B') {
+      inputForm.categoriaVeiculo = 1;
+      return true;
+    } else if (inputForm.categoriaVeiculo === 'C') {
+      inputForm.categoriaVeiculo = 2;
+      return true;
+    }
+    return false;
   }
 
   function cpfValidator() {

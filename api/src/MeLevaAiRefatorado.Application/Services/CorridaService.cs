@@ -83,10 +83,11 @@ namespace MeLevaAiRefatorado.Application.Services
             foreach (var veiculo in veiculos)
             {
                 var motorista = _motoristaRepository.Obter(veiculo.MotoristaId.GetValueOrDefault()).Result;
-                var carteira = _carteiraDeHabilitacaoRepository.Obter(motorista.CarteiraDeHabilitacaoId).Result;
 
                 if (motorista == null)
                     return null;
+
+                var carteira = _carteiraDeHabilitacaoRepository.Obter(motorista.CarteiraDeHabilitacaoId).Result;
 
                 if (carteira == null)
                     return null;

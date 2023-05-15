@@ -12,8 +12,6 @@ namespace MeLevaAiRefatorado.Domain.Contracts.Repositories
 
         Task<Veiculo> Remover(Veiculo veiculo);
 
-        Task<Veiculo> Atualizar(Veiculo veiculo);
-
         Task<Veiculo?> ObterPorMotorista(Guid motoristaId);
     }
 }

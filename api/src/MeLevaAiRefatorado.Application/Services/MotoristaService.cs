@@ -44,7 +44,13 @@ namespace MeLevaAiRefatorado.Application.Services
             {
                 response.AddNotification(new Notification("Cpf inválido."));
                 return response;
-            }   
+            }
+            
+            if (_motoristaRepository.ObterPorCpf(novoMotorista.Cpf).Result != null)
+            {
+                response.AddNotification(new Notification("Motorista já existe."));
+                return response;
+            }
 
             if (carteira.DataVencimento < DateTime.Now)
             {

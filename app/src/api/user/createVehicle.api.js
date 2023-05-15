@@ -11,10 +11,9 @@ export async function createVehicle({
   ano,
   quantidadeDeLugares,
 }) {
-  console.log(foto);
   const response = await axiosInstance.post(
     `v1/veiculos`,
-    { motoristaId, placa, marca, modelo, ano, cor, foto, quantidadeDeLugares, categoriaVeiculo },
+    { motoristaId, placa, marca, modelo, ano, cor, fotoUrl: foto, quantidadeDeLugares, categoriaVeiculo },
     {}
   );
   return response.data;

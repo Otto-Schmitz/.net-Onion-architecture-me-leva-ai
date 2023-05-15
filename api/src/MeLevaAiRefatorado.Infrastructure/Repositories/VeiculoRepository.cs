@@ -42,6 +42,7 @@ namespace MeLevaAiRefatorado.Infrastructure.Repositories
 
             return veiculo;
         }
+
         public async Task<Veiculo?> ObterPorMotorista(Guid motoristaId)
             => await _context.Veiculos.FindAsync(motoristaId);
     }

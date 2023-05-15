@@ -19,7 +19,6 @@ export function RequestRide() {
 
   async function handleClickSubmit(event) {
     event.preventDefault();
-    console.log(userId);
     try {
       const response = await requestRide({
         passageiroId: userId,
@@ -35,7 +34,6 @@ export function RequestRide() {
       toastMensagem('Corrida solicitada com sucesso.', TOAST_TYPES.success);
       navigate(`/`);
     } catch (error) {
-      console.log(error);
       toastMensagem(error.response.data.message, TOAST_TYPES.error);
     }
   }

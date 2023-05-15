@@ -46,12 +46,6 @@ export function Home() {
     refreshList();
   }, [showModal, page]);
 
-  function handleChangePagination(pageValue) {
-    if (page !== pageValue) {
-      setPage(pageValue);
-    }
-  }
-
   async function handleEndRide(idPassageiro) {
     setCurentPassangerId(idPassageiro);
 
@@ -66,7 +60,6 @@ export function Home() {
 
   function renderHome() {
     if (isLoading) return <Loading />;
-    console.log(passageiros);
     return (
       <>
         <Grid marginTop={'20px'} justifyContent={'center'} spacing={4} container>

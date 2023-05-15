@@ -9,10 +9,6 @@ namespace MeLevaAiRefatorado.Application.Mappers
         public static Passageiro ToPassageiro(this AdicionarPassageiroRequest request)
             => new(request.Nome, request.Email, request.DataNascimento, request.Cpf);
 
-        public static Passageiro ToAlterarPassageiro(this AlterarPassageiroRequest request)
-            => new(request.Nome, request.Email, request.DataNascimento, request.Cpf);
-
-
         public static PassageiroDto ToPassageiroDto(this Passageiro passageiro)
             => new()
             {

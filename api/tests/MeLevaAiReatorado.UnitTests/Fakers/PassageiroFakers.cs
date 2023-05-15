@@ -28,7 +28,7 @@ namespace MeLevaAiReatorado.UnitTests.Fakers
         public readonly Faker<AdicionarPassageiroRequest> AdicionarPassageiroMenorRequest = new Faker<AdicionarPassageiroRequest>("pt_BR")
             .RuleFor(p => p.Nome, f => f.Name.FullName())
             .RuleFor(p => p.Email, f => f.Internet.ExampleEmail("exemplo"))
-            .RuleFor(p => p.DataNascimento, f => f.Date.Between(DateTime.Now.AddYears(-17), DateTime.Now.AddYears(-10)))
+            .RuleFor(p => p.DataNascimento, f => f.Date.Between(DateTime.Now.AddYears(-15), DateTime.Now.AddYears(-10)))
             .RuleFor(p => p.Cpf, f => f.Person.Cpf(false));
 
         public readonly Faker<Passageiro> Passageiro = new Faker<Passageiro>("pt_BR")
@@ -39,7 +39,7 @@ namespace MeLevaAiReatorado.UnitTests.Fakers
             .CustomInstantiator(f
             => new()
             {
-                Id = Guid.NewGuid(),
+                Id = f.Random.Guid(),
                 Nome = f.Name.FullName(),
                 Email = f.Internet.ExampleEmail("exemplo"),
                 DataNascimento = f.Date.Between(DateTime.Now.AddYears(-18), DateTime.Now.AddYears(-25)),
