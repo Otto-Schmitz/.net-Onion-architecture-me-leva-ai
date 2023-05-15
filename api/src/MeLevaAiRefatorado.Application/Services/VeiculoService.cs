@@ -5,11 +5,6 @@ using MeLevaAiRefatorado.Application.Mappers;
 using MeLevaAiRefatorado.Application.Validations.Core;
 using MeLevaAiRefatorado.Domain.Contracts.Repositories;
 using MeLevaAiRefatorado.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MeLevaAiRefatorado.Application.Services
 {

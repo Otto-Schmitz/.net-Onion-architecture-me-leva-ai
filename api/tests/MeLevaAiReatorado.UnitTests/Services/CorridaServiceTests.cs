@@ -1,17 +1,11 @@
 ﻿using MeLevaAiReatorado.UnitTests.Fakers;
 using MeLevaAiRefatorado.Application.Contracts;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Corrida;
-using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Veiculo;
 using MeLevaAiRefatorado.Application.Services;
 using MeLevaAiRefatorado.Domain.Contracts.Repositories;
 using MeLevaAiRefatorado.Domain.Models;
 using MeLevaAiRefatorado.UnitTests.Fakers;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MeLevaAiRefatorado.UnitTests.Services
 {
@@ -80,6 +74,7 @@ namespace MeLevaAiRefatorado.UnitTests.Services
             _passageiroRepository.Setup(x => x.Obter(request.PassageiroId)).ReturnsAsync((Passageiro)null);
 
             var response = _corridaService.Chamar(request);
+
             _corridaRepository.Verify(x => x.Adicionar(It.IsAny<Corrida>()), Times.Never);
             Assert.NotNull(response);
             Assert.True(response.Notifications.Any(n => n.Message == "Passageiro inválida."));

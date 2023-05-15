@@ -1,5 +1,4 @@
-﻿using MeLevaAiRefatorado.Domain.Models;
-using MeLevaAiRefatorado.Domain.Models.Enuns;
+﻿using MeLevaAiRefatorado.Domain.Models.Enuns;
 using System.ComponentModel.DataAnnotations;
 
 namespace MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Motorista

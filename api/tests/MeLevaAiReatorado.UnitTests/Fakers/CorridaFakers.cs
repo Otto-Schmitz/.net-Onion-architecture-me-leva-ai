@@ -1,10 +1,5 @@
 ﻿using Bogus;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Corrida;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MeLevaAiRefatorado.UnitTests.Fakers
 {

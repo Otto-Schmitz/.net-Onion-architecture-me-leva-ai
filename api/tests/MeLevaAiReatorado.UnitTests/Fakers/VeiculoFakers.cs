@@ -1,18 +1,7 @@
 ﻿using Bogus;
-using Bogus.Extensions.UnitedKingdom;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Veiculo;
 using MeLevaAiRefatorado.Domain.Models;
 using MeLevaAiRefatorado.Domain.Models.Enuns;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit.Sdk;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MeLevaAiReatorado.UnitTests.Fakers
 {

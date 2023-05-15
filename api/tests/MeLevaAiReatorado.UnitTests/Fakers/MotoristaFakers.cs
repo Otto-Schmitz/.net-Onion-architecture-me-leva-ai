@@ -1,17 +1,8 @@
 ﻿using Bogus;
-using Bogus.DataSets;
 using Bogus.Extensions.Brazil;
-using CpfLibrary;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Motorista;
 using MeLevaAiRefatorado.Domain.Models;
 using MeLevaAiRefatorado.Domain.Models.Enuns;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit.Sdk;
 
 namespace MeLevaAiReatorado.UnitTests.Fakers
 {

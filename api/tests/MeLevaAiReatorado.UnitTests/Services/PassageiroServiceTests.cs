@@ -1,16 +1,10 @@
 ﻿using MeLevaAiReatorado.UnitTests.Fakers;
 using MeLevaAiRefatorado.Application.Contracts;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Pessoa.Passageiro;
-using MeLevaAiRefatorado.Application.Mappers;
 using MeLevaAiRefatorado.Application.Services;
 using MeLevaAiRefatorado.Domain.Contracts.Repositories;
 using MeLevaAiRefatorado.Domain.Models;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MeLevaAiReatorado.UnitTests.Services
 {

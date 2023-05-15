@@ -1,5 +1,4 @@
 ﻿using MeLevaAiRefatorado.Application.Contracts;
-using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Passageiro;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Pessoa.Passageiro;
 using MeLevaAiRefatorado.Application.Mappers;

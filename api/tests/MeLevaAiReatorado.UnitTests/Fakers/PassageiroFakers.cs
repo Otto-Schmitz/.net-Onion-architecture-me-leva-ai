@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit.Sdk;
-using Bogus;
-using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Passageiro;
+﻿using Bogus;
 using Bogus.Extensions.Brazil;
-using MeLevaAiRefatorado.Domain.Models;
-using Bogus.DataSets;
-using CpfLibrary;
-using MeLevaAiRefatorado.Application.Mappers;
+using MeLevaAiRefatorado.Application.Contracts.Documents.Requests.Pessoa.Passageiro;
 using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Pessoa.Passageiro;
-using MeLevaAiRefatorado.Application.Contracts.Documents.Responses.Pessoa;
+using MeLevaAiRefatorado.Domain.Models;
 
 namespace MeLevaAiReatorado.UnitTests.Fakers
 {
